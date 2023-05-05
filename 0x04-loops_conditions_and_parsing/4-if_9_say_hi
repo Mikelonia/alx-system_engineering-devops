@@ -2,7 +2,7 @@
 # This script is displaying "Best School" 10 times
 # but for the 9th iteration displays "Best School" and then "Hi"
 m=1
-while [ $i -le 10 ]
+while [ $m -le 10 ]
 do
 	if [ $m = 10 ]
 	then
