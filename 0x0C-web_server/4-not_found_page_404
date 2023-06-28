@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Nginx error 404 page
+# Nginx error 404 page, by Okpako Michael
 sudo apt-get update
 sudo apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html
