@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Turn on apache2 by Okpako Michael
+service apache2 start
