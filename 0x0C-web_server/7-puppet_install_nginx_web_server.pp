@@ -3,30 +3,16 @@ package { 'nginx':
   provider => 'apt',
 }
 
-file { '/etc/nginx/sites-available/default':
-  ensure  => file,
-  content => "
-    server {
-      listen 80 default_server;
-      listen [::]:80 default_server;
-      root /var/www/html;
-      index index.html index.htm index.nginx-debian.html;
-      server_name _;
-
-      location / {
-        return 200 'Hello World!';
-      }
-
-      location /redirect_me {
-        return 301 https://www.example.com/;
-      }
-    }
-  ",
+file_line { 'install':
+  ensure  => 'present',
+  path	  => 'etc/nginx/sites-enabled/default',
+  after	  => 'listen 80 default_server;',
+  line 	  => 'rewrite ^/rerdirect_me https://www.github.com/mikelonia permanent;',
 }
-
+file { '/var/www/html/index.html':
+  content => 'Hello world!',
+}
 service { 'nginx':
-  ensure    => running,
-  enable    => true,
-  subscribe => File['/etc/nginx/sites-available/default'],
+ ensure  => running,
+ require => package ['nginx'],
 }
-
