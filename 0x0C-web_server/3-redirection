@@ -3,14 +3,14 @@
 # Update package repositories
 sudo apt-get update
 
-# Install Nginx
+# Installing Nginx
 sudo apt-get -y install nginx
 
 # Create index.html with "Hello World!" content
 echo "Hello World!" > /var/www/html/index.html
 
 # Add redirect rule to Nginx configuration
-sudo sed -i '/server_name _;/a \        return 301 https://www.example.com/;' /etc/nginx/sites-enabled/default
+sudo sed -i '/server_name _;/a \        return 301 https://github.com/mikelonia;' /etc/nginx/sites-enabled/default
 
 # Restart Nginx service
 sudo service nginx restart
