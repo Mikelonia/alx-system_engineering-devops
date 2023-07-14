@@ -2,7 +2,14 @@
 # Nginx error 404 page, by Okpako Michael
 sudo apt-get update
 sudo apt-get -y install nginx
-echo "Hello World!" > /var/www/html/index.html
-echo "Ceci n'est pas une page \n" > /var/www/html/error.html
-sudo sed -i '/server.name..;/a \        error_page 404 /error.html;\n   location = /error.html {\n              root /var/www/html;\n           internal;\n     }'  /etc/nginx/sites-enabled/default
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+string_forreplacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/mikelonia permanent;"
+
+sudo sed -i "s/server_name _;/$string_forreplacement/" /etc/nginx/sites-enabled/default
+#creating the 404 error page, by Okpako Michael
+echo "Ceci n'est pasune page" | sudo tee /var/www/html/404.html
+string_forreplacement="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\troot \/var/www/html;\n\t\tinternal;\n\t}
+sudo sed -i "s/listen 80 default_server;/$string_forreplacement/" /etc/nginx/sites-enabled/default
+
 sudo service nginx restart
